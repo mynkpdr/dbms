@@ -35,7 +35,7 @@ select count(title) from book_catalogue where isbn_no in
   )
 ```
 ## Question 4
-Q001lisdb: Write a SQL statement to find the unique book titles which are issued to 'PG' students but not to 'UG' students .[Database: LIS] lisdb:
+Q001lisdb:Write a SQL statement to find the names of faculty (faculty_fname, faculty_lname) who did not issue any book.[Database: LIS] lisdb:
 
 ### Solution:
 ```SQL
