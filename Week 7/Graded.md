@@ -82,5 +82,39 @@ In this question, you must write a Python program to find the cosine of a number
 
 ### Solution:
 ```python
-SOLUTION NOT AVAILABLE
+import psycopg2
+import sys
+import os
+import math
+
+f = open("parameter.txt", "r")
+
+database = sys.argv[1]
+
+user = os.environ.get('PGUSER') 
+
+password = os.environ.get('PGPASSWORD') 
+
+host = os.environ.get('PGHOST')
+
+port = os.environ.get('PGPORT')
+
+con = psycopg2.connect(
+dbname=database,
+host=host,
+user=user,
+password=password,
+port=port
+)
+
+cur = con.cursor()
+details = []
+for team in f.readlines():
+    cur.execute(f"select sum(m.host_team_score) from teams t, matches m where t.team_id=m.host_team_id and t.name like '{team}%' and m.host_team_score>m.guest_team_score")
+    details.append(cur.fetchone())
+    
+S = details[0][0]
+X = S * 10
+X_deg = X * math.pi / 180
+print(round(math.cos(X_deg),2))
 ```
